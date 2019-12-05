@@ -1,6 +1,8 @@
 //This is a java program to represent graph as a adjacency matrix
 import java.util.Scanner;
 import java.util.Random;
+import java.util.ArrayList;
+import java.util.Arrays;
 public class adj_matrix
 {
     private final int vertices;
@@ -11,7 +13,7 @@ public class adj_matrix
         vertices = v;
         adjacency_matrix = new int[vertices + 1][vertices + 1];
     }
- 
+    
     public void makeEdge(int to, int from, int edge) 
     {
         try 
@@ -49,17 +51,37 @@ public class adj_matrix
             v = sc.nextInt();
             System.out.println("Enter the number of edges: ");
             e = sc.nextInt();
- 
+            ArrayList<ArrayList<Integer>> edges = new ArrayList<ArrayList<Integer>>();
             graph = new adj_matrix(v);
-
             System.out.println("Enter the edges: <to> <from>");
             while (count <= e) 
             {
                 
                 to = rand.nextInt(v);
                 from = rand.nextInt(v);
- 
-                graph.makeEdge(to, from, 1);
+                ArrayList<Integer> t = new ArrayList<Integer>();
+                t.add(to);
+                t.add(from);
+                if(!edges.contains(t))
+                {
+                    edges.add(t);
+                    graph.makeEdge(to+1, from+1, 1);
+                }
+                else
+                {
+                    while(edges.contains(t))
+                    {
+                        to = rand.nextInt(v);
+                        from = rand.nextInt(v);
+                        t = new ArrayList<Integer>();
+                        t.add(to);
+                        t.add(from);
+                    }
+                    edges.add(t);
+                    graph.makeEdge(to+1, from+1, 1);
+                }
+                System.out.printf("%d,%d\n",to+1,from+1);
+                
                 count++;
             }
  
