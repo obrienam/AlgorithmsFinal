@@ -60,7 +60,7 @@ public class adj_matrix
                 ArrayList<Integer> t = new ArrayList<Integer>();
                 t.add(to);
                 t.add(from);
-                int weight = rand.nextInt(v*v);
+                int weight = rand.nextInt((v*v))+1;
                 if(!edges.contains(t))
                 {
                     edges.add(t);
