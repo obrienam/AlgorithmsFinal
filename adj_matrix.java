@@ -22,7 +22,7 @@ public class adj_matrix
         }
         catch (ArrayIndexOutOfBoundsException index) 
         {
-            System.out.println("The vertices does not exists");
+            System.out.println("No such vertex!");
         }
     }
  
@@ -34,7 +34,7 @@ public class adj_matrix
         }
         catch (ArrayIndexOutOfBoundsException index) 
         {
-            System.out.println("The vertices does not exists");
+            System.out.println("No such vertex!");
         }
         return -1;
     }
@@ -53,19 +53,18 @@ public class adj_matrix
             e = sc.nextInt();
             ArrayList<ArrayList<Integer>> edges = new ArrayList<ArrayList<Integer>>();
             graph = new adj_matrix(v);
-            System.out.println("Enter the edges: <to> <from>");
             while (count <= e) 
             {
-                
                 to = rand.nextInt(v);
                 from = rand.nextInt(v);
                 ArrayList<Integer> t = new ArrayList<Integer>();
                 t.add(to);
                 t.add(from);
+                int weight = rand.nextInt(v*v);
                 if(!edges.contains(t))
                 {
                     edges.add(t);
-                    graph.makeEdge(to+1, from+1, 1);
+                    graph.makeEdge(to+1, from+1, weight);
                 }
                 else
                 {
@@ -78,13 +77,10 @@ public class adj_matrix
                         t.add(from);
                     }
                     edges.add(t);
-                    graph.makeEdge(to+1, from+1, 1);
-                }
-                System.out.printf("%d,%d\n",to+1,from+1);
-                
+                    graph.makeEdge(to+1, from+1, weight);
+                }              
                 count++;
             }
- 
             System.out.println("The adjacency matrix for the given graph is: ");
             System.out.print("  ");
             for (int i = 1; i <= v; i++)
