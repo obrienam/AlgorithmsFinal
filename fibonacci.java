@@ -220,6 +220,9 @@ public class FibHeap<T> {
         /* Clear the relocated node's parent; it's now a root. */
         value.setParent(null);
     }
+    
+        
+    
 
 }
 
