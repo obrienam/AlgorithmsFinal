@@ -126,18 +126,16 @@ public class DPQ {
             System.out.println("Enter the number of edges: ");
             e = sc.nextInt();
             ArrayList<Integer> initialSet = new ArrayList<Integer>();
-            ArrayList<Integer> visitedSet = new ArrayList<Integer>();
-            ArrayList<Integer> vertices = new ArrayList<Integer>();
             ArrayList<ArrayList<Integer>> edges = new ArrayList<ArrayList<Integer>>();
             graph = new adj_matrix(v);
             for(int i = 0; i < v; i++)
             {
                 initialSet.add(i);
-                vertices.add(i);
+               
             }
             int curVertex = 0;
             initialSet.remove(new Integer(curVertex));
-            visitedSet.add(curVertex);
+            
             while (count <= e) 
             {
                 ArrayList<Integer> t = new ArrayList<Integer>();
@@ -151,7 +149,7 @@ public class DPQ {
                     edges.add(t);
                     graph.makeEdge(curVertex, adjVertex,weight);
                     initialSet.remove(new Integer(adjVertex));
-                    visitedSet.add(adjVertex);
+                    
                     curVertex=adjVertex;
                     
                     count++;
