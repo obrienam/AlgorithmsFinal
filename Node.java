@@ -1,26 +1,37 @@
 //generic Node class
-public class Node<T>
+import java.util.*;
+public class Node implements Comparator<Node>
 {
-    private T data;
-    private Node<T> parent;
-    private Node<T> child;
-    private Node<T> next;
-    private Node<T> prev;
-    private final double priority;
+    private int data;
+    private Node parent;
+    private Node child;
+    private Node next;
+    private Node prev;
+    private double priority;
     private int numOfChildren = 0;
     private boolean isMarked;
+    public int cost;
+    public int node;
 
-    public Node(final T data, final double priority) {
-        left = right = this;
+    public Node() {
+
+    }
+
+    public Node(int data, double priority) {
         this.data = data;
         this.priority = priority;
     }
 
-    public T getData() {
+    public Node(int node, int cost) {
+        this.node = node;
+        this.cost = cost;
+    }
+
+    public int getData() {
         return data;
     }
 
-    public void setData(final T value) {
+    public void setData(int value) {
         data = value;
     }
 
@@ -28,39 +39,43 @@ public class Node<T>
         return priority;
     }
 
-    public void setParent(final Node<T> parent) {
+    public void setPriority(double p) {
+        priority = p;
+    }
+
+    public void setParent(Node parent) {
         this.parent = parent;
     }
 
-    public void setChild(final Node<T> child) {
+    public void setChild(Node child) {
         this.child = child;
     }
 
-    public void setNext(final Node<T> next) {
+    public void setNext(Node next) {
         this.next = next;
     }
 
-    public void setPrev(final Node<T> prev) {
+    public void setPrev(Node prev) {
         this.prev = prev;
     }
 
-    public Node<T> getParent() {
+    public Node getParent() {
         return parent;
     }
 
-    public Node<T> getChild() {
+    public Node getChild() {
         return child;
     }
 
-    public Node<T> getNext() {
+    public Node getNext() {
         return next;
     }
 
-    public Node<T> getPrev() {
+    public Node getPrev() {
         return prev;
     }
 
-    public void setMarked(final boolean v) {
+    public void setMarked(boolean v) {
         isMarked = v;
     }
 
@@ -72,8 +87,18 @@ public class Node<T>
         return numOfChildren;
     }
 
-    public void setDegree(final int num) {
+    public void setDegree(int num) {
         numOfChildren = num;
     }
+
+    @Override
+    public int compare(Node node1, Node node2) 
+    { 
+        if (node1.cost < node2.cost) 
+            return -1; 
+        if (node1.cost > node2.cost) 
+            return 1; 
+        return 0; 
+    } 
 
 }
