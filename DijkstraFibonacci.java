@@ -1,44 +1,50 @@
 // Java implementation of Dijkstra's Algorithm  
 // using Priority Queue 
 import java.util.*;
-public class DPQ { 
-    private int dist[]; 
+public class DijkstraFibonacci { 
+    public int dist[]; 
     private Set<Integer> settled; 
-    private PriorityQueue<Node> pq; 
+    private FibHeap pq; 
     private int V; // Number of vertices 
     List<List<Node> > adj; 
-  
-    public DPQ(int V) 
+    
+    public DijkstraFibonacci(int V) 
     { 
         this.V = V; 
         dist = new int[V]; 
         settled = new HashSet<Integer>(); 
-        pq = new PriorityQueue<Node>(V, new Node()); 
+        pq = new FibHeap(); 
     } 
   
     // Function for Dijkstra's Algorithm 
     public void dijkstra(List<List<Node> > adj, int src) 
     { 
+    
         this.adj = adj; 
   
         for (int i = 0; i < V; i++) 
             dist[i] = Integer.MAX_VALUE; 
   
         // Add source node to the priority queue 
-        pq.add(new Node(src, 0)); 
-  
+        pq.insert(src, 0); 
+        
         // Distance to the source is 0 
         dist[src] = 0; 
         while (settled.size() != V) { 
             // remove the minimum distance node  
             // from the priority queue  
-            int u = pq.remove().node; 
-  
+            Node r;
+            r=pq.removeMin();
+            int u = r.node;
+            
+            settled.add(u); 
+
+            e_Neighbours(u); 
+            
+            
             // adding the node whose distance is 
             // finalized 
-            settled.add(u); 
-  
-            e_Neighbours(u); 
+            
         } 
     } 
   
@@ -63,7 +69,7 @@ public class DPQ {
                     dist[v.node] = newDistance; 
   
                 // Add the current node to the queue 
-                pq.add(new Node(v.node, dist[v.node])); 
+                pq.insert(v.node, dist[v.node]); 
             } 
         } 
     } 
@@ -102,15 +108,15 @@ public class DPQ {
         
   
         // Calculate the single source shortest path 
-        DPQ dpq = new DPQ(V); 
-        dpq.dijkstra(adj, source); 
+        DijkstraFibonacci dfb = new DijkstraFibonacci(V); 
+        dfb.dijkstra(adj, source); 
   
         // Print the shortest path to all the nodes 
         // from the source node 
         System.out.println("The shorted path from node :"); 
-        for (int i = 0; i < dpq.dist.length; i++) 
+        for (int i = 0; i < dfb.dist.length; i++) 
             System.out.println(source + " to " + i + " is "
-                               + dpq.dist[i]); 
+                               + dfb.dist[i]); 
     } 
     public static adj_matrix init_matrix()
     {
@@ -199,4 +205,4 @@ public class DPQ {
         return null;
     }
 } 
-
+ 
