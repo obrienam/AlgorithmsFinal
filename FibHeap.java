@@ -151,10 +151,23 @@ public class FibHeap{
         else if (one == null && two != null)
             return two;
         else {
-            final Node oneNext = one.getNext();
-            one.getNext().setPrev(one);
+            Node oneNext = null;
+            if (one.getNext() == null) {
+                one.setPrev(one);
+            }
+            else {
+                oneNext = one.getNext();
+                one.getNext().setPrev(one);
+            }
+            
             two.setNext(oneNext);
-            two.getNext().setPrev(two);
+            if (two.getNext() == null) {
+                two.setPrev(two);
+            }
+            else {
+                two.getNext().setPrev(two);
+            }
+            
             return one.getPriority() < two.getPriority() ? one : two;
 
         }
