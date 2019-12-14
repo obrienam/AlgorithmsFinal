@@ -34,13 +34,13 @@ public class DijkstraFibonacci {
             // remove the minimum distance node  
             // from the priority queue  
             Node r;
-            r=pq.removeMin();
+            r=pq.findMin();
             int u = r.node;
             
             settled.add(u); 
 
             e_Neighbours(u); 
-            
+            System.out.println("Here?");
             
             // adding the node whose distance is 
             // finalized 
